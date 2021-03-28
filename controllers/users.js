@@ -5,8 +5,8 @@ const User = require("../models/users");
 
 // GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
 router.get("/", (req, res) => {
-  Hotels.find({}, (err, foundHotels) => {
-    res.json(foundHotels);
+  User.find({}, (err, foundUsers) => {
+    res.json(foundUsers);
   });
 });
 
