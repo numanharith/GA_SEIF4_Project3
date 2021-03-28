@@ -17,4 +17,4 @@ router.post("/", (req, res) => {
   });
 });
 
-module.exports = user;
+module.exports = router;
