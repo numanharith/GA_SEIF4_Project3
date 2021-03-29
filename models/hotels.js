@@ -8,6 +8,7 @@ const hotelSchema = new mongoose.Schema({
       size: String,
       price: Number,
       roomNumber: Number,
+      img: String,
       dates: [ 
         {
           date: Date,
