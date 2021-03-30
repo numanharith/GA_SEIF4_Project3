@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Hotels = require('../models/hotels');
-const { create } = require('../models/users');
+const bcrypt = require("bcrypt");
+// const { create } = require('../models/users');
 
 // GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
 router.get('/', (req, res) => {

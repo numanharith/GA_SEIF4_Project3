@@ -11,6 +11,7 @@ const port = process.env.PORT;
 
 // Controllers 
 const hotelsController = require('./controllers/hotels');
+const usersController = require('./controllers/users');
 
 // ... other imports
 const path = require('path');
@@ -30,6 +31,7 @@ app.use(express.json());
 
 // Routes
 app.use('/hotels', hotelsController);
+app.use('/users', usersController);
 
 app.get('/', (req, res) => {
   res.status(404).json('Sorry, page does not exist!');
