@@ -17,7 +17,7 @@ const path = require('path');
 
 // Connect to Mongo
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-	console.log(`MongoDB connection established: ${mongoURI}`);
+	console.log(`MongoDB connection established.`);
 });
 
 // Error / Disconnection
@@ -36,5 +36,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`App is listening on port ${PORT}`)
+  console.log(`App is listening on port ${port}.`)
 })
