@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import AuthApi from '../utils/AuthAPI'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -46,8 +47,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function SignIn() {
   const classes = useStyles();
+
+  
+  const authApi = React.useContext(AuthApi)
+const handleSignIn = () => {
+  authApi.setAuth(true);
+}
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,16 +68,16 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="username"
+            name="username"
+            autoComplete="username"
             autoFocus
           />
           <TextField
@@ -77,7 +86,7 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="password"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -87,11 +96,11 @@ export default function SignIn() {
             label="Remember me"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSignIn}
           >
             Sign In
           </Button>
@@ -102,7 +111,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
