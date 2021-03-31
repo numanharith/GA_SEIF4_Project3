@@ -7,7 +7,6 @@ export default class BookRoom extends Component {
 
         this.state = {
             // need help!
-
             size: '',
             date: '',
         };

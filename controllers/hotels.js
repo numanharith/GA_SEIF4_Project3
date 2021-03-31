@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
 	});
 });
 
-// CREATE NEW HOTEL (This will be hardcoded settled.)
+
+// CREATE NEW HOTEL (This will be hardcoded)
 router.post('/', (req, res) => {
 	Hotels.create(req.body, (err, createdHotel) => {
 		res.json(createdHotel);
@@ -19,22 +20,22 @@ router.post('/', (req, res) => {
 });
 
 // EDIT HOTEL (This will also be hardcoded as an API)
-router.put('/:id', (req, res) => {
-	Hotels.findByIdAndUpdate(
-		req.params.id,
-		req.body,
-		{ new: true },
-		(err, updatedHotel) => {
-			res.json(updatedHotel);
-		}
-	);
-});
+// router.put('/:id', (req, res) => {
+// 	Hotels.findByIdAndUpdate(
+// 		req.params.id,
+// 		req.body,
+// 		{ new: true },
+// 		(err, updatedHotel) => {
+// 			res.json(updatedHotel);
+// 		}
+// 	);
+// });
 
 // DELETE HOTEL (This will also be hardcoded as an API)
-router.delete('/:id', (req, res) => {
-	Hotels.findByIdAndRemove(req.params.id, (err, deletedHotel) => {
-		res.json(deletedHotel);
-	});
-});
+// router.delete('/:id', (req, res) => {
+// 	Hotels.findByIdAndRemove(req.params.id, (err, deletedHotel) => {
+// 		res.json(deletedHotel);
+// 	});
+// });
 
 module.exports = router;

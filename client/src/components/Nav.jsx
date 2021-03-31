@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import '../css/Nav.css';
 
+
 export default class Nav extends Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
             <div>
