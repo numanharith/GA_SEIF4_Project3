@@ -17,24 +17,25 @@ export default class BookRoom extends Component {
         this.setState({ [event.target.id]: event.target.value });
     };
 
-    createNewBooking = async () => {
-        try {
-            const response = await axios.post('/hotels', {
-                // should follow the this.state above
-                // need help!
-                name: this.state.hotel.name,
-                size: this.state.room.size,
-                date: this.state.room.date,
-            });
-            this.props.fetchdata();
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    /*-------- need to figure how to push bookings into ROOMS -------*/
+    // createNewBooking = async () => {
+    //     try {
+    //         const response = await axios.post('/hotels', {
+    //             // should follow the this.state above
+    //             // need help!
+    //             name: this.state.hotel.name,
+    //             size: this.state.room.size,
+    //             date: this.state.room.date,
+    //         });
+    //         this.props.fetchdata();
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // };
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.createNewBooking();
+        // this.createNewBooking();
         this.setState({
             // follow this.state above but make it empty
             // need help!
