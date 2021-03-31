@@ -12,6 +12,7 @@ export class App extends Component {
 
         this.state = {
             hotels: [],
+            users: [],
         };
     }
 
@@ -27,14 +28,37 @@ export class App extends Component {
         }
     };
 
+    fetchusers = async () => {
+        try {
+            const response = await axios.get('/users');
+            //console.log(response.data);
+            this.setState({
+                users: response.data,
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     componentDidMount = () => {
         this.fetchdata();
+        this.fetchusers();
     };
 
     render() {
         return (
             <React.Fragment>
-                <Nav />
+                {this.state.users.map((user, index) => {
+                    return (
+                        <Nav
+                            user={user}
+                            key={user._id}
+                            fetchusers={this.fetchusers}
+                        />
+                    );
+                })}
+
+                <h1>SG HOTELS</h1>
                 <div className='hotelCards album py-5 bg-light'>
                     <div className='container'>
                         <div className='row'>
@@ -50,7 +74,6 @@ export class App extends Component {
                         </div>
                     </div>
                 </div>
-                <BookRoom />
                 <div className='roomCards album py-5 bg-light'>
                     <div className='container'>
                         <div className='row'>
@@ -63,6 +86,13 @@ export class App extends Component {
                                     />
                                 );
                             })}
+                        </div>
+                    </div>
+                </div>
+                <div className='roomCards album py-5 bg-light'>
+                    <div className='container'>
+                        <div className='row'>
+                            <BookRoom />
                         </div>
                     </div>
                 </div>
