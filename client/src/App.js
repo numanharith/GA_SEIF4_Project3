@@ -6,7 +6,7 @@ import HotelRoomType from './components/HotelRoomType';
 import Nav from './components/Nav';
 const axios = require('axios');
 
-export class App extends Component {
+export default class App extends Component {
     constructor(props) {
         super(props);
 
@@ -100,5 +100,3 @@ export class App extends Component {
         );
     }
 }
-
-export default App;
