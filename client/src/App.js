@@ -1,66 +1,79 @@
-import './App.css';
-import React, { Component } from 'react';
-import Hotel from './components/Hotel';
-import BookRoom from './components/BookRoom';
-import HotelRoomType from './components/HotelRoomType';
-import Nav from './components/Nav';
-const axios = require('axios');
+// import "./App.css";
+// import React, { Component } from "react";
+// import Hotel from "./components/Hotel";
+// import BookRoom from "./components/BookRoom";
+// import HotelRoomType from "./components/HotelRoomType";
+// import Nav from "./components/Nav";
+// const axios = require("axios");
 
-export class App extends Component {
-	constructor(props) {
-		super(props);
+// export class App extends Component {
+//   constructor(props) {
+//     super(props);
 
-		this.state = {
-			hotels: [],
-		};
-	}
+//     this.state = {
+//       hotels: [],
+//     };
+//   }
 
-	fetchdata = async () => {
-		try {
-			const response = await axios.get('/hotels');
-			console.log(response.data);
-			this.setState({
-				hotels: response.data,
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+//   fetchdata = async () => {
+//     try {
+//       const response = await axios.get("/hotels");
+//       console.log(response.data);
+//       this.setState({
+//         hotels: response.data,
+//       });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
 
-	componentDidMount = () => {
-		this.fetchdata();
-	};
+//   componentDidMount = () => {
+//     this.fetchdata();
+//   };
 
-	render() {
-		return (
-			<React.Fragment>
-        <Nav />
-        <div className="hotelCards album py-5 bg-light">
-          <div className="container">
-            <div className="row">          
-              {this.state.hotels.map((hotel, index) => {
-                return (
-                  <Hotel hotel={hotel} />
-                )
-              })}
-            </div>
-          </div>
-        </div>
-        <BookRoom />
-        <div className="roomCards album py-5 bg-light">
-          <div className="container">
-            <div className="row">          
-              {this.state.hotels.map((hotel, index) => {
-                return (
-                  <HotelRoomType hotel={hotel} />
-                )
-              })}
-            </div>
-          </div>
-        </div>
-			</React.Fragment>
-		);
-	}
+//   render() {
+//     return (
+//       <React.Fragment>
+//         <Nav />
+//         <div className="hotelCards album py-5 bg-light">
+//           <div className="container">
+//             <div className="row">
+//               {this.state.hotels.map((hotel, index) => {
+//                 return <Hotel hotel={hotel} />;
+//               })}
+//             </div>
+//           </div>
+//         </div>
+//         <BookRoom />
+//         <div className="roomCards album py-5 bg-light">
+//           <div className="container">
+//             <div className="row">
+//               {this.state.hotels.map((hotel, index) => {
+//                 return <HotelRoomType hotel={hotel} />;
+//               })}
+//             </div>
+//           </div>
+//         </div>
+//       </React.Fragment>
+//     );
+//   }
+// }
+
+// export default App;
+
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router } from "react-router-dom";
+import Routes from "./routes/Routes";
+
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Routes />
+      </Router>
+    </div>
+  );
 }
 
 export default App;
