@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 // const { create } = require('../models/users');
 
 // GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
+//Temporary disable
 router.get("/", (req, res) => {
   User.find({}, (err, foundUsers) => {
     res.json(foundUsers);
@@ -12,14 +13,50 @@ router.get("/", (req, res) => {
 });
 
 // CREATE NEW USERS (This will be hardcoded settled.)
-router.post("/", (req, res) => {
-  req.body.password = bcrypt.hashSync(
-    req.body.password,
-    bcrypt.genSaltSync(10)
-  );
-  User.create(req.body, (err, createdUser) => {
-    res.json(createdUser);
-  });
+//Temporary disable
+// router.post("/", (req, res) => {
+//   req.body.password = bcrypt.hashSync(
+//     req.body.password,
+//     bcrypt.genSaltSync(10)
+//   );
+//   User.create(req.body, (err, createdUser) => {
+//     res.json(createdUser);
+//   });
+// });
+
+router.post("/signin", async (req, res) => {
+  // console.log(req.body);
+  const { username, password } = req.body;
+  const user = await User.findUser(username, password);
+  if (user) {
+    res.json({
+      message: "you are successfully login",
+      auth: true,
+    });
+  } else {
+    res.json({
+      message: "login unsucessful",
+      auth: false,
+    });
+  }
+  console.log(user);
+});
+router.post("/signup", (req, res) => {
+  const user = new User(req.body);
+  user
+    .save()
+    .then((result) => {
+      res.json({
+        message: "successfully created user",
+        auth: true,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        message: "unable to create account",
+        auth: false,
+      });
+    });
 });
 
 module.exports = router;

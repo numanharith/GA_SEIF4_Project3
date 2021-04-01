@@ -10,7 +10,8 @@ function Routes() {
     <Switch>
       <RouteRegisteration path='/signin' component={SignIn} />
       <RouteRegisteration path='/signUp' component={SignUp} />
-      <RouteProtected path='/dashboard' component={Dashboard} />
+      <RouteProtected path='/dashboard' component={Dashboard} /> 
+      {/* /dashboard to hotel main page */}
 
     </Switch>
   )
