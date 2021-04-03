@@ -40,7 +40,7 @@ router.post("/signin", async (req, res) => {
       auth: false,
     });
   }
-  console.log(user);
+  // console.log(user);
 });
 router.post("/signup", (req, res) => {
   const user = new User(req.body);
@@ -67,7 +67,7 @@ router.get("/hassignned", (req, res) => {
   if (req.session.user) {
     return res.json({
       auth: true,
-      message: "you are signin",
+      message: "you are sign in",
     });
   }
   return res.json({

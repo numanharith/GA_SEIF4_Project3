@@ -16,7 +16,7 @@ const hasSignned = async () => {
 }
 
 const signout = async () => {
-  const res = await axios.get('users/hassignned');
+  const res = await axios.get('users/signout');
   return res
 }
 
