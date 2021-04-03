@@ -62,7 +62,7 @@ export default class BookRoom extends Component {
                         value={this.state.date}
                         onChange={this.handleChange}
                         id='date'
-                        placeholder='date'
+              ƒ         placeholder='date'
                     />
                     <br />
                     <br />
