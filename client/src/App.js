@@ -1,118 +1,133 @@
 import './App.css';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import HomePage from './pages/HomePage';
-import HotelsPage from './pages/HotelsPage'
-import RoomTypesPage from './pages/RoomTypesPage'
-import RoomsPage from './pages/RoomsPage'
-import TopNav from './pages/TopNav'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-const axios = require('axios');
+import HotelsPage from './pages/HotelsPage';
+import RoomsPage from './pages/RoomsPage';
+import TopNav from './components/TopNav';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import axios from 'axios';
 
-export default class App extends Component {
-    constructor(props) {
-        super(props);
+const App = () => {
+  const [hotels, getHotels] = useState('');
 
-        this.state = {
-            hotels: [],
-            users: [],
-        };
-    }
+  useEffect(() => {
+    getAllHotels();
+  }, []);
 
-    fetchdata = async () => {
-        try {
-            const response = await axios.get('/hotels');
-            //console.log(response.data);
-            this.setState({
-                hotels: response.data,
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    };
+  const getAllHotels = () => {
+    axios
+      .get('/hotels')
+      .then((response) => {
+        const allHotels = response.data;
+        getHotels(allHotels);
+      })
+      .catch((error) => console.error(`Error: ${error}`));
+  };
 
-    fetchusers = async () => {
-        try {
-            const response = await axios.get('/users');
-            //console.log(response.data);
-            this.setState({
-                users: response.data,
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    };
+  return (
+    <Router>
+      <React.Fragment>
+        <TopNav />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route
+            exact
+            path='/hotels'
+            render={() => <HotelsPage hotels={hotels} key={hotels._id} />}
+          />
+          {/* <Route
+            exact
+            path='/hotels/:id'
+            render={(props) => (
+              <RoomsPage
+                hotels={hotels}
+                key={hotels._id}
+                {...props}
+              />
+            )}
+          /> */}
+          <Route exact path='/hotels/:id' component={RoomsPage} />
+        </Switch>
+      </React.Fragment>
+    </Router>
+  );
+};
 
-    componentDidMount = () => {
-        this.fetchdata();
-        this.fetchusers();
-    };
+export default App;
+// export default class App extends Component {
+// 	constructor(props) {
+// 		super(props);
 
-    render() {
-        return (
-            <Router>
-                <React.Fragment>
-                    <TopNav />
-                    <Switch>
-                        <Route exact path='/' exact component={HomePage} />
-                        <Route 
-                            exact path='/hotels' 
-                            render={() => <HotelsPage hotels={this.state.hotels} />} 
-                        />
-                        <Route exact path='/roomtypes' component={RoomTypesPage}/>
-                        <Route exact path='/rooms' component={RoomsPage} />
-                    </Switch>
-                </React.Fragment>
-            </Router>
-            // <React.Fragment>
-            //     {this.state.users.map((user, index) => {
-            //         return (
-            //             <Nav
-            //                 user={user}
-            //                 key={user._id}
-            //                 fetchusers={this.fetchusers}
-            //             />
-            //         );
-            //     })}
+// 		this.state = {
+// 			hotels: [],
+// 			users: [],
+// 		};
+// 	}
 
-            //     <h1>SG HOTELS</h1>
-            //     <div className='hotelCards album py-5 bg-light'>
-            //         <div className='container'>
-            //             <div className='row'>
-            //                 {this.state.hotels.map((hotel, index) => {
-            //                     return (
-            //                         <Hotel
-            //                             hotel={hotel}
-            //                             key={hotel._id}
-            //                             fetchdata={this.fetchdata}
-            //                         />
-            //                     );
-            //                 })}
-            //             </div>
-            //         </div>
-            //     </div>
-            //     <div className='roomCards album py-5 bg-light'>
-            //         <div className='container'>
-            //             <div className='row'>
-            //                 {this.state.hotels.map((hotel, index) => {
-            //                     return (
-            //                         <HotelRoomType
-            //                             hotel={hotel}
-            //                             key={hotel._id}
-            //                             fetchdata={this.fetchdata}
-            //                         />
-            //                     );
-            //                 })}
-            //             </div>
-            //         </div>
-            //     </div>
-            //     <div className='roomCards album py-5 bg-light'>
-            //         <div className='container'>
-            //             <div className='row'>
-            //                 <BookRoom />
-            //             </div>
-            //         </div>
-            //     </div>
-            // </React.Fragment>
-        );
-    }
-}
+// 	fetchdata = async () => {
+// 		try {
+// 			const response = await axios.get('/hotels');
+// 			this.setState({
+// 				hotels: response.data,
+// 			});
+// 		} catch (err) {
+// 			console.log(err);
+// 		}
+// 	};
+
+// 	fetchusers = async () => {
+// 		try {
+// 			const response = await axios.get('/users');
+// 			//console.log(response.data);
+// 			this.setState({
+// 				users: response.data,
+// 			});
+// 		} catch (err) {
+// 			console.log(err);
+// 		}
+// 	};
+
+// 	componentDidMount = () => {
+// 		this.fetchdata();
+// 		this.fetchusers();
+// 	};
+
+// 	render() {
+// 		return (
+// 			<Router>
+// 				<React.Fragment>
+// 					<TopNav />
+// 					<Switch>
+// 						<Route exact path='/' component={HomePage} />
+// 						<Route
+// 							exact
+// 							path='/hotels'
+// 							render={() => (
+// 								<HotelsPage
+// 									hotels={this.state.hotels}
+// 									key={this.state.hotels._id}
+// 								/>
+// 							)}
+// 						/>
+// 						<Route
+// 							exact
+// 							path='/hotels/:id'
+// 							render={(props) => (
+// 								<RoomsPage
+// 									hotels={this.state.hotels}
+// 									key={this.state.hotels._id}
+// 									{...props}
+// 								/>
+// 							)}
+// 						/>
+// 						<Route exact path='/rooms' component={RoomsPage} />
+// 					</Switch>
+// 				</React.Fragment>
+// 			</Router>
+// 		);
+// 	}
+// }

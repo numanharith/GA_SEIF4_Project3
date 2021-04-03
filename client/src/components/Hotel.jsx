@@ -1,31 +1,52 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default class Hotels extends Component {
-    constructor(props) {
-        super(props);
+const Hotel = (props) => {
+  const { hotel } = props;
 
-        this.state = {
-            // need to edit
-        };
-    }
+  return (
+    <div className='col-md-4'>
+      <div className='card mb-4 shadow-sm'>
+        <Link to={`/hotels/${hotel._id}`}>
+          <img
+            className='bd-placeholder-img card-img-top'
+            src={hotel.img}
+            alt={hotel.name}
+            width='100%'
+            height='255'
+          />
+        </Link>
+        <div className='card-body'>
+          <h1 className='card-text d-flex justify-content-center'>
+            <Link to={`/hotels/${hotel._id}`}>{hotel.name}</Link>
+          </h1>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-    render() {
-        return (
-            <div className='col-md-4'>
-                <div className='card mb-4 shadow-sm'>
-                    <img
-                        className='bd-placeholder-img card-img-top'
-                        src={this.props.hotel.img}
-                        width='100%'
-                        height='255'
-                    />
-                    <div className='card-body'>
-                        <h1 className='card-text d-flex justify-content-center'>
-                            {this.props.hotel.name}
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+export default Hotel;
+
+// export default class Hotels extends Component {
+// 	render() {
+// 		return (
+// 			<div className='col-md-4'>
+// 				<div className='card mb-4 shadow-sm'>
+// 				<Link to={`/hotels/${hotel._id}`}><img
+// 						className='bd-placeholder-img card-img-top'
+// 						src={hotel.img}
+// 						alt={hotel.name}
+// 						width='100%'
+// 						height='255'
+// 					/></Link>
+// 					<div className='card-body'>
+// 					<Link to={`/hotels/${hotel._id}`}>
+// 						<h1 className='card-text d-flex justify-content-center'>{hotel.name}</h1>
+// 					</Link>
+// 					</div>
+// 				</div>
+// 			</div>
+// 		);
+// 	}
+// }

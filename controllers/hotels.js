@@ -5,12 +5,18 @@ const bcrypt = require("bcrypt");
 // const { create } = require('../models/users');
 
 // GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
+// GET HOTEL FROM ID ON URL
+router.get('/:id', (req, res) => {
+	Hotels.findById(req.params.id, (err, foundHotels) => {
+		res.json(foundHotels);
+	});
+});
+
 router.get('/', (req, res) => {
 	Hotels.find({}, (err, foundHotels) => {
 		res.json(foundHotels);
 	});
 });
-
 
 // CREATE NEW HOTEL (This will be hardcoded)
 router.post('/', (req, res) => {
@@ -18,7 +24,6 @@ router.post('/', (req, res) => {
 		res.json(createdHotel);
 	});
 });
-
 // EDIT HOTEL (This will also be hardcoded as an API)
 // router.put('/:id', (req, res) => {
 // 	Hotels.findByIdAndUpdate(
