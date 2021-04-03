@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,8 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
 import AuthApi from '../utils/AuthAPI'
+import { signin } from './auth-api';
+ 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -47,16 +48,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 export default function SignIn() {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
   const classes = useStyles();
-
+  // const authApi = React.useContext(AuthApi);
+  const authApi = useContext(AuthApi);
   
-  const authApi = React.useContext(AuthApi)
-const handleSignIn = () => {
-  authApi.setAuth(true);
-}
+  ///function
+  const handleSignIn = async(e) => {
+    const res = await signin ({username ,password});
+    // console.log(res)
+    if (res.data.auth) {
+      authApi.setAuth(true);
+    }
+    console.log(res)
+  
+  };
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    if (e.target.name === 'username'){ /// referring to name that we have targeted.
+      setUsername(e.target.value);
+    } else {
+      setPassword(e.target.value); 
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -79,6 +96,7 @@ const handleSignIn = () => {
             name="username"
             autoComplete="username"
             autoFocus
+            onChange = {handleOnChange}
           />
           <TextField
             variant="outlined"
@@ -90,6 +108,7 @@ const handleSignIn = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange = {handleOnChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

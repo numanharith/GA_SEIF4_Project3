@@ -61,14 +61,27 @@
 
 // export default App;
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/Routes";
 import AuthApi from "./utils/AuthAPI";
+import { hasSignned } from "./components/auth-api";
 
 function App() {
   const [auth, setAuth] = useState(false);
+
+  const readSession = async () => {
+    const res = await hasSignned();
+    // console.log(res);
+    if (res.data.auth) {
+      setAuth(true);
+    }
+  };
+  /// use to run after
+  useEffect(() => {
+    readSession();
+  }, []);
   return (
     <div className="App">
       <AuthApi.Provider value={{ auth, setAuth }}>

@@ -9,13 +9,13 @@ const userSchema = new mongoose.Schema({
 ///below statics is for login purpose
 userSchema.statics.findUser = async function (username, password) {
   const user = await User.findOne({ username }); ///find user first using findone
-  console.log(user);
   if (!user) {
     ///if not user will return no.
     return;
   }
 
   const isMatch = await bcrypt.compare(password, user.password); /// compare user key in pw with backend pw
+  console.log(isMatch);
   if (!isMatch) {
     return; //if false return empty
   }

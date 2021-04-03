@@ -75,4 +75,11 @@ router.get("/hassignned", (req, res) => {
     message: "you are not login",
   });
 });
+
+router.get("/signout", (req, res) => {
+  req.session.destroy();
+  res.json({
+    auth: false,
+  });
+});
 module.exports = router;
