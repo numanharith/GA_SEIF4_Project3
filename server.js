@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const db = mongoose.connection;
+const session = require('express-session');
 require('dotenv').config();
 
 // Enviroment variables
@@ -29,9 +30,19 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+/// to create session
+app.use(
+  session({
+    secret: "SECRET",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
+
 // Routes
-app.use('/hotels', hotelsController);
 app.use('/users', usersController);
+app.use('/hotels', hotelsController);
 
 app.get('/', (req, res) => {
   res.status(404).json('Sorry, page does not exist!');
