@@ -24,6 +24,23 @@ router.post('/', (req, res) => {
 		res.json(createdHotel);
 	});
 });
+
+///find and update to push
+
+///get request to see if hotel is available. once get bring to front end and compare? how to input dates to compare?
+router.get('/findDate', (req, res) => {
+	Hotels.find({bookedDates: dates}, (err, dates) => {
+		res.json(dates);
+	});
+});
+
+///Update dates and booking need see code again.account
+router.put('/update', (req,res) => {
+	Hotels.findByIdAndUpdate({bookedDates:dates}, {new:true})
+})
+
+
+
 // EDIT HOTEL (This will also be hardcoded as an API)
 // router.put('/:id', (req, res) => {
 // 	Hotels.findByIdAndUpdate(

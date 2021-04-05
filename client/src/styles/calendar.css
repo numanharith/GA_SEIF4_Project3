@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+.date-range {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.date-range .input {
+  width: 100%;
+}
+
+.date-range_arrow {
+  flex-shrink: 0;
+  position: relative;
+  width: 36px;
+}
+
+.date-range_arrow:before {
+  border-right: 2px solid #d3dde6;
+  border-top: 2px solid #d3dde6;
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  height: 18px;
+  left: 50%;
+  margin-left: -14px;
+  margin-top: -9px;
+  position: absolute;
+  top: 50%;
+  transform: rotate(45deg);
+  width: 18px;
+}
+
+input {
+  padding: 20p  
+}
+
+.nice-dates-popover:not(.-open) {
+  opacity: 0;
+  pointer-events: none;
+  transform: perspective(1000px) rotateX(-15deg);
+}
+
+.nice-dates-popover {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 8px rgb(0 0 0 / 12%);
+  margin: 8px 0;
+  max-width: 600px;
+  position: absolute;
+  transform-origin: top;
+  transform: perspective(1000px);
+  transition-property: transform,opacity;
+  transition-duration: .4s;
+  transition-timing-function: cubic-bezier(.4,.2,0,1.1);
+  width: 100%;
+  will-change: transform,opacity;
+  z-index: 9;
+}
+
+.nice-dates-navigation {
+  align-items: center;
+  color: #0e3254;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.nice-dates-week-header {
+  box-shadow: 0 1px 0 rgb(0 0 0 / 6%);
+  display: flex;
+  padding: 8px 0;
+}
+
+.nice-dates-grid {
+  box-sizing: content-box;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+}
+
+.nice-dates-day {
+  border-top: 1px solid transparent;
+  box-sizing: border-box;
+  color: #0e3254;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  text-align: center;
+  width: 14.28571%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+

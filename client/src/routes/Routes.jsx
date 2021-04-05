@@ -4,9 +4,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
 import AuthApi from '../utils/AuthAPI';
-import TopNav from '../components/TopNav';
 import HotelsPage from '../pages/HotelsPage';
 import RoomsPage from '../pages/RoomsPage';
+import BookingPage from '../pages/BookingPage';
 
 function Routes() {
   return (
@@ -15,6 +15,7 @@ function Routes() {
       <RouteRegistration path='/signUp' component={SignUp} />
       <RouteProtected exact path='/hotels' component={HotelsPage} />
       <RouteProtected exact path='/hotels/:id' component={RoomsPage} />
+      <Route exact path='/test' component={BookingPage} />
       {/* /dashboard to hotel main page */}
     </Switch>
   );

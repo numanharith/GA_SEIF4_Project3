@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Hotel from '../components/Hotel';
 import TopNav from '../components/TopNav';
+
 const HotelsPage = () => {
   useEffect(() => {
     fetchHotels();
