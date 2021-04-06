@@ -44,10 +44,16 @@ router.get('/findDate', (req, res) => {
 });
 
 ///Update dates and booking need see code again.account
-router.put('/update', (req,res) => {
-	Hotels.findByIdAndUpdate({bookedDates:dates}, {new:true})
-})
-
+router.put('/update/:id', (req, res) => {
+	Hotels.findByIdAndUpdate(
+		req.params.id,
+		req.body,
+		{new: true},
+		(err, updateDates) => {
+			res.json(updateDates)
+		}
+	);
+});
 
 
 // EDIT HOTEL (This will also be hardcoded as an API)
