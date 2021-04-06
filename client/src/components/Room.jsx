@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Room = (props) => {
   const { room } = props;
@@ -16,7 +17,7 @@ const Room = (props) => {
         />
         <div className='card-body'>
           <h1 className='card-text d-flex justify-content-center'>
-            {room.size}
+            <Link to={{pathname:`rooms/${room._id}/`, state: room }}>{room.size}</Link>
           </h1>
           <br />
           Price: ${room.price}/night

@@ -15,7 +15,7 @@ function Routes() {
       <RouteRegistration path='/signUp' component={SignUp} />
       <RouteProtected exact path='/hotels' component={HotelsPage} />
       <RouteProtected exact path='/hotels/:id' component={RoomsPage} />
-      <Route exact path='/test' component={BookingPage} />
+      <Route exact path='/hotels/:hotelid/:roomid' component={BookingPage} />
       {/* /dashboard to hotel main page */}
     </Switch>
   );

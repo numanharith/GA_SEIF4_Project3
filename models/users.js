@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
+  username: {type: String, required: true, minLength: 4},
+  password: {type: String, required: true, minLength: 4}
 });
 
 ///below statics is for login purpose
@@ -15,7 +15,6 @@ userSchema.statics.findUser = async function (username, password) {
   }
 
   const isMatch = await bcrypt.compare(password, user.password); /// compare user key in pw with backend pw
-  console.log(isMatch);
   if (!isMatch) {
     return; //if false return empty
   }

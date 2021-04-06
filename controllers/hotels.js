@@ -4,14 +4,23 @@ const Hotels = require('../models/hotels');
 const bcrypt = require("bcrypt");
 // const { create } = require('../models/users');
 
-// GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
 // GET HOTEL FROM ID ON URL
 router.get('/:id', (req, res) => {
-	Hotels.findById(req.params.id, (err, foundHotels) => {
-		res.json(foundHotels);
+	Hotels.findById(req.params.id, (err, foundHotel) => {
+		res.json(foundHotel);
 	});
 });
 
+// GET ROOM FROM ID ON URL
+// router.get('/:hotelid/:roomid', (req, res) => {
+// 	Hotels.findById(req.params.hotelid, (err, foundHotel) => {
+// 		foundHotel.find({}, (err, foundRoom) => {
+// 			res.json(foundRoom);
+// 		});
+// 	});
+// });
+
+// GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
 router.get('/', (req, res) => {
 	Hotels.find({}, (err, foundHotels) => {
 		res.json(foundHotels);

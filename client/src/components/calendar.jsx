@@ -3,10 +3,30 @@ import { enGB } from 'date-fns/locale'
 import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import '../styles/calendar.css';
+import moment from 'moment';
+const axios = require('axios').default;
 
 function Calendar() {
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
+
+  // const updateData = async () => {
+  //   try {
+  //     const response = await axios.put(`/hotels/${this.props.bookmark._id}`, 
+  //     {
+  //       title: this.state.title,
+  //       url: this.state.url,
+  //     });
+  //     this.props.fetchdata();
+  //     console.log(response);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  console.log(`Start date is ${moment(startDate).format("yyyyMMDD")}`);
+  // console.log(`Start date is ${moment(startDate).toDate("yyyyMMDD")}`);
+  
   return (
     <DateRangePicker
       startDate={startDate}
@@ -23,13 +43,13 @@ function Calendar() {
           <input
             className={'input' + (focus === START_DATE ? ' -focused' : '')}
             {...startDateInputProps}
-            placeholder='Check-in Date'
+            placeholder='Start date'
           />
           <span className='date-range_arrow' />
           <input
             className={'input' + (focus === END_DATE ? ' -focused' : '')}
             {...endDateInputProps}
-            placeholder='Check-out Date'
+            placeholder='End date'
           />
         </div>
       )}
@@ -38,48 +58,3 @@ function Calendar() {
 }
 
 export default Calendar;
-
-// import React, { useState } from 'react';
-// import { format } from 'date-fns';
-// import { enGB } from 'date-fns/locale';
-// import { DateRangePickerCalendar, START_DATE } from 'react-nice-dates';
-// import 'react-nice-dates/build/style.css';
-// import '../styles/calendar.css';
-
-// const Calendar = () => {
-//   const [checkInDate, setCheckInDate] = useState();
-//   const [checkOutDate, setCheckOutDate] = useState();
-//   const [focus, setFocus] = useState(START_DATE);
-//   const handleFocusChange = (newFocus) => {
-//     setFocus(newFocus || START_DATE);
-//   };
-//   return (
-//     <div className='calendar'>
-//       <p>
-//         Check-in Date:{' '}
-//         {checkInDate
-//           ? format(checkInDate, 'dd MMM yyyy', { locale: enGB })
-//           : 'none'}
-//         .
-//       </p>
-//       {/* moment().format('L');  05/04/2021  Need to formate to DD/MM/YYYY for backend */}
-//       {/* use switch case to join to DD/MM/YYYY Eg 4 Apr 2021, if Apr = 4. So 12 months have to put as switch case */}
-//       <p>
-//         Check-out Date:{' '}
-//         {checkOutDate ? format(checkOutDate, 'dd MMM yyyy', { locale: enGB }) : 'none'}.
-//       </p>
-//       <p>Currently selecting: {focus}</p>
-//       <DateRangePickerCalendar
-//         checkInDate={checkInDate}
-//         checkOutDate={checkOutDate}
-//         focus={focus}
-//         onCheckInDateChange={setCheckInDate}
-//         onCheckOutDateChange={setCheckOutDate}
-//         onFocusChange={handleFocusChange}
-//         locale={enGB}
-//       />
-//     </div>
-//   );
-// };
-
-// export default Calendar;

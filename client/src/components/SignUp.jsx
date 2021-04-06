@@ -91,7 +91,9 @@ export default function SignUp() {
                                 label='username'
                                 name='username'
                                 autoComplete='username'
+                                minLength="4"
                                 onChange={handleOnChange}
+                                
                             />
                         </Grid>
                         <Grid item xs={12}>

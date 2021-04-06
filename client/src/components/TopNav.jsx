@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/Nav.css';
 import { NavLink } from 'react-router-dom';
 import AuthApi from '../utils/AuthAPI';
 import { signout } from '../components/auth-api';
