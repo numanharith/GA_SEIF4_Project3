@@ -13,8 +13,8 @@ function Routes() {
         <Switch>
             <RouteRegistration path='/signin' component={SignIn} />
             <RouteRegistration path='/signUp' component={SignUp} />
-            <RouteProtected exact path='/' component={HotelsPage} />
-            <RouteProtected exact path='/:id' component={RoomsPage} />
+            <RouteProtected exact path='/hotels' component={HotelsPage} />
+            <RouteProtected exact path='/hotels/:id' component={RoomsPage} />
             <Route
                 exact
                 path='/hotels/:hotelid/:roomid'
