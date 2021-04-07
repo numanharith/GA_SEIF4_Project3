@@ -34,50 +34,54 @@ router.post('/', (req, res) => {
     });
 });
 
-///find and update to push
-///get request to see if hotel is available. once get bring to front end and compare? how to input dates to compare?
-router.get('/findDate', (req, res) => {
-    Hotels.find({ bookedDates: dates }, (err, dates) => {
-        res.json(dates);
-    });
-});
-
-///Update dates and booking need see code again.account
-router.put('/update/:id', (req, res) => {
-    Hotels.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        { new: true },
-        (err, updateDates) => {
-            res.json(updateDates);
-        },
-    );
-});
-
 // EDIT HOTEL (This will also be hardcoded as an API)
 // router.put('/:id', (req, res) => {
-// 	Hotels.findByIdAndUpdate(
-// 		req.params.id,
-// 		req.body,
-// 		{ new: true },
-// 		(err, updatedHotel) => {
-// 			res.json(updatedHotel);
-// 		}
-// 	);
+//     Hotels.findByIdAndUpdate(
+//         req.params.id,
+//         req.body,
+//         { new: true },
+//         (err, updatedHotel) => {
+//             res.json(updatedHotel);
+//         },
+//     );
 // });
 
 // DELETE HOTEL (This will also be hardcoded as an API)
 // router.delete('/:id', (req, res) => {
-// 	Hotels.findByIdAndRemove(req.params.id, (err, deletedHotel) => {
-// 		res.json(deletedHotel);
-// 	});
+//     Hotels.findByIdAndRemove(req.params.id, (err, deletedHotel) => {
+//         res.json(deletedHotel);
+//     });
 // });
 
-// DELETE ROOM BOOKING - id here should be bookings id
-router.delete('/:id', (req, res) => {
+///find and update to push
+///get request to see if hotel is available. once get bring to front end and compare? how to input dates to compare?
+// router.get('/findDate', (req, res) => {
+//     Hotels.find({ bookedDates: dates }, (err, dates) => {
+//         res.json(dates);
+//     });
+// });
+
+///Update dates and booking need see code again.account
+// router.put('/update/:id', (req, res) => {
+//     Hotels.findByIdAndUpdate(
+//         req.params.id,
+//         req.body,
+//         { new: true },
+//         (err, updateDates) => {
+//             res.json(updateDates);
+//         },
+//     );
+// });
+
+// DELETE ROOM BOOKING -
+router.delete('/:hotelid/:bookingid', (req, res) => {
     Hotels.findByIdAndUpdate(
-        { _id: req.params.id },
-        { $pull: { bookings: { checkIn: req.params.id } } },
+        req.params.hotelid,
+        {
+            $pull: {
+                'rooms.0.bookings': { _id: req.params.bookingid },
+            },
+        },
         { new: true },
         function (err, deletedBooking) {
             if (err) {
