@@ -10,19 +10,34 @@ function Calendar() {
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
 
-  const newStartDate = moment(startDate).format("yyyyMMDD");
-  const newEndDate = moment(endDate).format("yyyyMMDD")
+  const newStartDate = moment(startDate).format("L");
+  const newEndDate = moment(endDate).format("L");
+  const newStartDate1 = new Date(moment(startDate).format("L"));
+  const newEndDate1 = new Date(moment(endDate).format("L"));
   console.log(`Start date is ${newStartDate}`)
   console.log(`End date is ${newEndDate}`)
+  
 
-  // const date1 = 7/13/2021
-  // const date2 = 7/16/2021
+  ////formula for num of night
   function getDifferenceInDays(date1, date2) {
   const diffInMs = Math.abs(date2 - date1);
   return diffInMs / (1000 * 60 * 60 * 24);
 }
 
-console.log(getDifferenceInDays(newStartDate, newEndDate));
+const numOfNight = getDifferenceInDays(newStartDate1, newEndDate1);
+console.log(numOfNight);
+
+Date.prototype.addDays = function (days) {
+  const date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+};
+
+
+for (let i = 0; i < numOfNight; i++){
+  let newDate = newStartDate1.addDays(i);
+  console.log(newDate)
+}
 // console.log(getDifferenceInDays(date1, date2));
 
   
