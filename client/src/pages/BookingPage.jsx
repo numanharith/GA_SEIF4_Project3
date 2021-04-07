@@ -12,7 +12,7 @@ const BookingPage = (props) => {
       <p>Room {roomNumber}</p>
       <p>Price: ${price}</p>
       <div>
-        <Calendar />
+        <Calendar price ={price} />
       </div>
     </div>
   );
