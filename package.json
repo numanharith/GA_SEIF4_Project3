@@ -1,31 +1,36 @@
 {
-  "name": "GA_SEIF4_Project3",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/numanharith/GA_SEIF4_Project3.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/numanharith/GA_SEIF4_Project3/issues"
-  },
-  "homepage": "https://github.com/numanharith/GA_SEIF4_Project3#readme",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "bcrypt": "^5.0.1",
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "mongoose": "^5.12.2",
-    "path": "^0.12.7"
-  }
+    "name": "GA_SEIF4_Project3",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/numanharith/GA_SEIF4_Project3.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/numanharith/GA_SEIF4_Project3/issues"
+    },
+    "homepage": "https://github.com/numanharith/GA_SEIF4_Project3#readme",
+    "dependencies": {
+        "axios": "^0.21.1",
+        "bcrypt": "^5.0.1",
+        "bcryptjs": "^2.4.3",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "mongoose": "^5.12.2",
+        "path": "^0.12.7"
+    },
+    "engines": {
+        "node": "15.6.0",
+        "npm": "7.4.0"
+    }
 }

@@ -9,8 +9,9 @@ require('dotenv').config();
 // Enviroment variables
 const mongoURI = process.env.MONGODB_URI;
 const port = process.env.PORT;
+const secret = process.env.SECRET;
 
-// Controllers 
+// Controllers
 const hotelsController = require('./controllers/hotels');
 const usersController = require('./controllers/users');
 
@@ -18,36 +19,45 @@ const usersController = require('./controllers/users');
 const path = require('path');
 
 // Connect to Mongo
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-	console.log(`MongoDB connection established.`);
-});
+mongoose.connect(
+    mongoURI,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => {
+        console.log(`MongoDB connection established.`);
+    },
+);
 
 // Error / Disconnection
 db.on('error', (err) => console.log(`${err.message} is Mongod not running?`));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
 // Middleware
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 /// to create session
 app.use(
-  session({
-    secret: "SECRET",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
-  })
+    session({
+        secret: 'SECRET',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false },
+    }),
 );
 
 // Routes
 app.use('/users', usersController);
 app.use('/hotels', hotelsController);
 
-app.get('/', (req, res) => {
-  res.status(404).json('Sorry, page does not exist!');
+// app.get('/', (req, res) => {
+//     res.status(404).json('Sorry, page does not exist!');
+// });
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 app.listen(port, () => {
-  console.log(`App is listening on port ${port}.`)
-})
+    console.log(`App is listening on port ${port}.`);
+});
