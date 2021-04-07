@@ -48,7 +48,7 @@ app.use(
 
 // Routes
 app.use('/users', usersController);
-app.use('/hotel', hotelsController);
+app.use('/hotels', hotelsController);
 
 // app.get('/', (req, res) => {
 //     res.status(404).json('Sorry, page does not exist!');
