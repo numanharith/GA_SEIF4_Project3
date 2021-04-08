@@ -20,7 +20,7 @@ const path = require("path");
 // Connect to Mongo
 mongoose.connect(
   mongoURI,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, // prevent warning from console
   () => {
     console.log(`MongoDB connection established.`);
   }

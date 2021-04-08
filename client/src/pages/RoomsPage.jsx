@@ -24,7 +24,7 @@ const RoomsPage = ({ match }) => {
           <div className='container'>
             <div className='row'>
               {rooms.map((room) => {
-                return <Room room={room} key={room._id} />;
+                return <Room hotel={match.params.id} room={room} key={room._id} />;
               })}
             </div>
           </div>

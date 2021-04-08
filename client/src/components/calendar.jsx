@@ -9,14 +9,8 @@ const axios = require('axios');
 
 const Calendar = (props) => {
 
-  const simpleFormat = (date) => {
-    moment(date).format("L"); 
-    return;
-  }
-
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
-  // const [newStartSimpleDate, setCheckIn] = useState({newStartDate})
   
   const {price} = props;
 
@@ -27,7 +21,9 @@ const Calendar = (props) => {
   console.log(price)
   console.log('#################')
   console.log(`Start date1 is ${newStartDate1}`)
+  console.log(`Start date is ${newStartDate}`)
   console.log(`End date is ${newEndDate}`)
+  console.log(`End date1 is ${newEndDate1}`)
   
 
   ////formula for num of night
@@ -46,66 +42,71 @@ const Calendar = (props) => {
     return date;
   };
 
-
+  let bookingDates = [ ];
   for (let i = 0; i < numOfNight; i++){
     let newDate = newStartDate1.addDays(i);
-    console.log(newDate)
-  }
+    bookingDates.push(moment(newDate).format("L"))
+    // console.log(moment(newDate).format("L"));
 
-  const totalprice = (price*numOfNight);
+    console.log('this is booking dates: ' + bookingDates)
+  }
+  
+ 
+
+  const totalPrice = (price*numOfNight);
   console.log(price*numOfNight)
   
   const handleChange= (event) =>{
     console.log(event.target.value);
   } 
 
-  const bookings = {
-    checkIn: {newStartDate1},
-      checkOut: {newEndDate1},
-      totalPrice: {totalprice},
-      totalNight: {numOfNight},
-  }
+  // const bookings = {
+  //   checkIn: {newStartDate1},
+  //   checkOut: {newEndDate1},
+  //   totalPrice: {totalprice},
+  //   totalNight: {numOfNight},
+  // }
 
   const addBooking = async () => {
     try {
-      // const response = await axios.put(`/:${hotelid}/${bookingid}`,
-      const response = await axios.put(`/:hotelid/:roomsid`,
+      const response = await axios.put(`/hotels/${props.hotelId}/${props.roomId}`,
     {
-      // checkIn: {newStartDate1},
-      // checkOut: {newEndDate1},
-      // totalPrice: {totalprice},
-      // totalNight: {numOfNight},
+      checkIn: newStartDate,
+      checkOut: newEndDate,
+      totalPrice: totalPrice,
+      totalNight: numOfNight,
+      bookedDates: bookingDates
+      
       // user: {req.session.user}
-      bookings:{bookings}
     });
-      this.props.fetchdata();
-      console.log(response)
+      
+    // console.log('this is response: ' + response)
     } catch (err) {
       console.log(err)
     }
   }
 
 
-  const addBookedDates = async () => {
-    try {
-      const response = await axios.put('/update/:id',
-    {
-      // here need to add loops
-    });
-      this.props.fetchdata();
-      console.log(response)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // const addBookedDates = async () => {
+  //   try {
+  //     const response = await axios.put(`/hotels/${props.hotelId}/${props.roomId}`,
+  //   {
+  //     // here need to add loops
+  //   });
+     
+  //     console.log(response)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // addBooking();
+    addBooking();
     // addBookedDates();
   }
-  console.log('&&&&&&&&&&&&')
-console.log({startDate})
+//   console.log('&&&&&&&&&&&&')
+// console.log({startDate})
 
 
 
@@ -182,10 +183,10 @@ console.log({startDate})
 
        <input
       type='text'
-      value= {totalprice}
+      value= {totalPrice}
       id='totalPrice'
       placeholder='title'
-      readOnly= {totalprice}
+      readOnly= {totalPrice}
       onChange={handleChange}
       />
       <br></br>
