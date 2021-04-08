@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TopNav from '../components/TopNav';
+import { TopNav } from '../components/TopNav';
 import Calendar from '../components/Calendar';
 
 const BookingPage = ( { match, location } ) => {

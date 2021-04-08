@@ -5,6 +5,9 @@ import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import '../styles/calendar.css';
 import moment from 'moment';
+import { signin } from './auth-api';
+import {user} from '../components/SignIn';
+
 const axios = require('axios');
 
 const Calendar = (props) => {
@@ -194,10 +197,10 @@ const Calendar = (props) => {
 
       <input
       type='text'
-      value= 'user?'
+      value= {user}
       id='user'
-      placeholder='title'
-      readOnly='user'
+      placeholder='user?'
+      readOnly={user}
       onChange={handleChange}
       />
       <br></br>

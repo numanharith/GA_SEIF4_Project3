@@ -1,19 +1,14 @@
-import './App.css';
+import "./App.css";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 // import HomePage from './pages/HomePage';
 // import HotelsPage from './pages/HotelsPage';
 // import RoomsPage from './pages/RoomsPage';
 // import TopNav from './components/TopNav';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import AuthApi from "./utils/AuthAPI";
 import { hasSignned, signout } from "./components/auth-api";
-import Routes from './routes/Routes';
+import Routes from "./routes/Routes";
 // import TopNav from './components/TopNav';
 
 const App = () => {
@@ -28,7 +23,7 @@ const App = () => {
     if (res.data.auth) {
       setAuth(true);
     }
-  }
+  };
 
   return (
     <div className="App">

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import AuthApi from '../utils/AuthAPI';
 import { signout } from '../components/auth-api';
 
-const TopNav = () => {
+export const TopNav = () => {
   const authApi = React.useContext(AuthApi);
 
   const handleSignOut = async () => {
@@ -17,13 +17,13 @@ const TopNav = () => {
       <ul className='nav justify-content-end'>
         <li className='nav-item'>
           <NavLink className='nav-link' to='/hotels'>
-            Hotels
+            Home
           </NavLink>
         </li>
         <li className='nav-item'>
           {/* below is to user profile */}
-          <NavLink className='nav-link' to='/hotels/user'>
-            Welcome!
+          <NavLink className='nav-link' to='/profile'>
+            Account
           </NavLink>
         </li>
       </ul>
@@ -31,5 +31,3 @@ const TopNav = () => {
     </div>
   );
 };
-
-export default TopNav;

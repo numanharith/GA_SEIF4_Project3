@@ -29,11 +29,12 @@ router.post("/signin", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findUser(username, password);
   if (user) {
-    req.session.user = user._id; /// for storing session
-    console.log("User ID is: ");
+    req.session.user = user; /// for storing session
+    console.log(`User ID is: ${user}`);
     res.json({
       message: "you are successfully login",
       auth: true,
+      username: user.username,
     });
   } else {
     res.json({

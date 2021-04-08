@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Room from '../components/Room';
-import TopNav from '../components/TopNav';
+import { TopNav } from '../components/TopNav';
 
 const RoomsPage = ({ match }) => {
   useEffect(() => {

@@ -48,6 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export let user = ''
+
 export default function SignIn() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -56,11 +58,15 @@ export default function SignIn() {
   const authApi = useContext(AuthApi);
   
   ///function
+  
+  
   const handleSignIn = async(e) => {
     const res = await signin ({username ,password});
     // console.log(res)
     if (res.data.auth) {
       authApi.setAuth(true);
+      user = res.username
+      return res.username;
     }
     // console.log('hello')
   };
@@ -143,3 +149,5 @@ export default function SignIn() {
     </Container>
   );
 }
+
+

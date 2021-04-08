@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Hotel from '../components/Hotel';
-import TopNav from '../components/TopNav';
+import { TopNav } from '../components/TopNav';
 
 const HotelsPage = () => {
   useEffect(() => {
@@ -22,6 +22,7 @@ const HotelsPage = () => {
       <div>
         <TopNav />
         <h1>Hotels Page</h1>
+        {/* <h2>User: {req.session.user}<h2> */}
         <div className='hotelCards album py-5 bg-light'>
           <div className='container'>
             <div className='row'>
