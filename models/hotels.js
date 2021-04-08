@@ -12,8 +12,8 @@ const hotelSchema = new mongoose.Schema({
       bookedDates: [],
       bookings: [
         {
-          checkIn: Date,
-          checkOut: Date,
+          checkIn: String,
+          checkOut: String,
           totalPrice: Number,
           totalNight: Number,
           user: {

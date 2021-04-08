@@ -62,7 +62,7 @@ export default function SignIn() {
     if (res.data.auth) {
       authApi.setAuth(true);
     }
-    console.log('hello')
+    // console.log('hello')
   };
 
   const handleOnChange = (e) => {
