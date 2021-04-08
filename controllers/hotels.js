@@ -73,6 +73,18 @@ router.post('/', (req, res) => {
 //     );
 // });
 
+// need to put this in user profile to delete booking
+// need to test if this works
+// <button onClick={deleteBooking}>
+const deleteBooking = async (hotelid, id) => {
+    try {
+        const response = await axios.delete(`/:${hotelid}/${bookingid}`);
+        //console.log(response);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 // DELETE ROOM BOOKING -
 router.delete('/:hotelid/:bookingid', (req, res) => {
     Hotels.findByIdAndUpdate(
