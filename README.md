@@ -52,6 +52,9 @@ As a user, I want to be able to login to the application.
 5. Node.js
 6. Heroku deployment
 7. Bootstrap
+8. Moment.js
+9. React-nice-dates
+10. react router
 
 ## Methodology
 

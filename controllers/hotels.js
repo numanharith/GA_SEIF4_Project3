@@ -55,16 +55,14 @@ router.get("/findDate", (req, res) => {
 
 ///Update booking - actually this can be same as our create booking above right? -cyn
 router.put("/:hotelid/:roomid/", async (req, res) => {
-  const bookedDates = req.body.bookedDates;
   try {
     await Hotels.findOneAndUpdate(
       { "rooms._id": req.params.roomid },
       {
         $push: {
           "rooms.$.bookings": req.body,
-          "rooms.$.bookedDates": { ...bookedDates },
+          "rooms.$.bookedDates": { $each: req.body.bookedDates },
         },
-        // $addToSet: { "rooms.$.bookedDates": bookedDates },
       }
     );
     res.status(200).json(req.body);
