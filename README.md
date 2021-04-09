@@ -92,7 +92,6 @@ A working full-stack application using MERN (MongoDB, Express, React and Node.js
 ## Challenges
 * Had difficulties passing props down to component with React Hook
 * Merging codes - can't blindly copy & paste 
-* 
 
 ## Future Developments
 * Allow users to edit bookings
