@@ -6,6 +6,7 @@ const Room = ( { room, hotel } ) => {
   // const { room } = props;
 
   return (
+    
     <div className='col-md-4'>
       <h2>{room.name}</h2>
       <div className='card mb-4 shadow-sm'>

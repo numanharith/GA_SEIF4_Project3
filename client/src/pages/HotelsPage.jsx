@@ -21,7 +21,8 @@ const HotelsPage = () => {
     return (
       <div>
         <TopNav />
-        <h1>Hotels Page</h1>
+        <br></br>
+        <h1>List of Hotels</h1>
         <div className='hotelCards album py-5 bg-light'>
           <div className='container'>
             <div className='row'>

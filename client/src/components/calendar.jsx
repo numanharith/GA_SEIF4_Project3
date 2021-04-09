@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom';
+import AuthApi from '../utils/AuthAPI';
 import { Link } from 'react-router-dom';
 import { enGB } from 'date-fns/locale'
 import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
@@ -8,11 +10,26 @@ import moment from 'moment';
 const axios = require('axios');
 
 const Calendar = (props) => {
+  const authApi = React.useContext(AuthApi);
+  useEffect(() => {
+    fetchUserId();
+  }, []);
 
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
-  
+  const [id, getId] = useState('');
   const {price} = props;
+
+  const fetchUserId = async () => {
+    try {
+      const fetchUserId = await fetch('/users/profile');
+      const userId = await fetchUserId.json();
+      await getId(userId);
+      console.log(`id in calendar ${userId}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const newStartDate = moment(startDate).format("L");
   const newEndDate = moment(endDate).format("L");
@@ -51,21 +68,12 @@ const Calendar = (props) => {
     console.log('this is booking dates: ' + bookingDates)
   }
   
- 
-
   const totalPrice = (price*numOfNight);
   console.log(price*numOfNight)
   
   const handleChange= (event) =>{
     console.log(event.target.value);
   } 
-
-  // const bookings = {
-  //   checkIn: {newStartDate1},
-  //   checkOut: {newEndDate1},
-  //   totalPrice: {totalprice},
-  //   totalNight: {numOfNight},
-  // }
 
   const addBooking = async () => {
     try {
@@ -86,24 +94,12 @@ const Calendar = (props) => {
     }
   }
 
-
-  // const addBookedDates = async () => {
-  //   try {
-  //     const response = await axios.put(`/hotels/${props.hotelId}/${props.roomId}`,
-  //   {
-  //     // here need to add loops
-  //   });
-     
-  //     console.log(response)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
   const handleSubmit = (event) => {
+   
     event.preventDefault();
     addBooking();
-    // addBookedDates();
+    // console.log(`/users/profile/${id}`);
+    // window.location.href= `/users/profile/${id}`
   }
 //   console.log('&&&&&&&&&&&&')
 // console.log({startDate})
@@ -187,7 +183,7 @@ const Calendar = (props) => {
       <h6>Total Price(SGD):</h6>
        <input
       type='text'
-      value= {totalPrice}
+      value={totalPrice}
       id='totalPrice'
       placeholder='title'
       readOnly
@@ -207,7 +203,8 @@ const Calendar = (props) => {
       <br></br>
       <br></br>
 
-      <button type='submit'>Book Now!</button>
+      {/* <button type='submit' to={`/users/profile${id}`}>Book Now!</button> */}
+      <a href={`/users/profile/${id}`}><button type='submit'>Book Now!</button></a>
     </form>
     
     </div>

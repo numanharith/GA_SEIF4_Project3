@@ -27,26 +27,3 @@ const Hotel = (props) => {
 };
 
 export default Hotel;
-
-// export default class Hotels extends Component {
-// 	render() {
-// 		return (
-// 			<div className='col-md-4'>
-// 				<div className='card mb-4 shadow-sm'>
-// 				<Link to={`/hotels/${hotel._id}`}><img
-// 						className='bd-placeholder-img card-img-top'
-// 						src={hotel.img}
-// 						alt={hotel.name}
-// 						width='100%'
-// 						height='255'
-// 					/></Link>
-// 					<div className='card-body'>
-// 					<Link to={`/hotels/${hotel._id}`}>
-// 						<h1 className='card-text d-flex justify-content-center'>{hotel.name}</h1>
-// 					</Link>
-// 					</div>
-// 				</div>
-// 			</div>
-// 		);
-// 	}
-// }

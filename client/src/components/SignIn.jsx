@@ -14,13 +14,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import AuthApi from '../utils/AuthAPI'
 import { signin } from './auth-api';
- 
+import '../styles/signin.css';
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        The Hotel App
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -76,13 +77,16 @@ export default function SignIn() {
 
   return (
     <Container component="main" maxWidth="xs">
+      <div></div>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+        {/* <Typography component="h1" variant="h5" > */}
+        {/* <Typography style={{font-family:'Lobster',cursive}}> */}
+        <Typography >
+          <span id='fonts'>The Hotel App</span>
         </Typography>
         <form className={classes.form}>
           <TextField

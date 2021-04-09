@@ -1,0 +1,37 @@
+/* 
+*{
+  border: 1px solid gold;
+} */
+
+img {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a, .nav-link {
+    text-decoration: none;
+    font-size: 20px;
+    color: black
+}
+
+.nav-link:hover {
+    color: red;
+    cursor: pointer
+}
+
+.box {
+display:flex;
+background-color:#ee6e73;
+/* justify-content:flex-end; */
+}
+
+.leftBox{
+    width:20%;
+}
+
+.rightBox{
+width:80%;
+    display: flex;
+justify-content: flex-end;
+}

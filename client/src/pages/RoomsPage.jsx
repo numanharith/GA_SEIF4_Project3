@@ -19,7 +19,8 @@ const RoomsPage = ({ match }) => {
     return (
       <div>
         <TopNav />
-        <h1>Rooms Page</h1>
+        <br></br>
+        <h1>Room Types</h1>
         <div className='hotelCards album py-5 bg-light'>
           <div className='container'>
             <div className='row'>

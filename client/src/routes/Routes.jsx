@@ -7,6 +7,7 @@ import AuthApi from '../utils/AuthAPI';
 import HotelsPage from '../pages/HotelsPage';
 import RoomsPage from '../pages/RoomsPage';
 import BookingPage from '../pages/BookingPage';
+import { UserProfilePage } from '../pages/UserProfilePage';
 
 function Routes() {
   return (
@@ -16,6 +17,7 @@ function Routes() {
       <RouteProtected exact path='/hotels' component={HotelsPage} />
       <RouteProtected exact path='/hotels/:id' component={RoomsPage} />
       <RouteProtected exact path='/hotels/:hotelid/:roomid' component={BookingPage} />
+      <RouteProtected exact path='/users/profile/:userid' component={UserProfilePage} />
       {/* /dashboard to hotel main page */}
     </Switch>
   );
