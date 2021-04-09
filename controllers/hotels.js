@@ -3,14 +3,8 @@ const router = express.Router();
 const Hotels = require('../models/hotels');
 const Users = require('../models/users');
 const bcrypt = require('bcrypt');
-// const { create } = require('../models/users');
 
-// GET HOTEL FROM ID ON URL
-router.get('/:id', (req, res) => {
-  Hotels.findById(req.params.id, (err, foundHotel) => {
-    res.json(foundHotel);
-  });
-});
+
 
 // GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
 router.get('/', (req, res) => {
@@ -26,28 +20,30 @@ router.post('/', (req, res) => {
   });
 });
 
-// EDIT HOTEL (This will also be hardcoded as an API)
-// router.put('/:id', (req, res) => {
-//     Hotels.findByIdAndUpdate(
-//         req.params.id,
-//         req.body,
-//         { new: true },
-//         (err, updatedHotel) => {
-//             res.json(updatedHotel);
-//         },
-//     );
-// });
+// GET HOTEL FROM ID ON URL
+router.get('/:id', (req, res) => {
+  Hotels.findById(req.params.id, (err, foundHotel) => {
+    res.json(foundHotel);
+  });
+});
 
-// CREATE BOOKING - create new booking by updating current hotel data
+// EDIT HOTEL (This will also be hardcoded as an API)
 router.put('/:id', (req, res) => {
   Hotels.findByIdAndUpdate(
     req.params.id,
     req.body,
     { new: true },
-    (err, updated) => {
-      res.json(updated);
+    (err, updatedHotel) => {
+      res.json(updatedHotel);
     }
   );
+});
+
+// DELETE HOTEL (This will also be hardcoded as an API)
+router.delete('/:id', (req, res) => {
+  Hotels.findByIdAndRemove(req.params.id, (err, deletedHotel) => {
+    res.json(deletedHotel);
+  });
 });
 
 ///get request to see if hotel is available. once get bring to front end and compare? how to input dates to compare?
@@ -57,6 +53,7 @@ router.get('/findDate', (req, res) => {
   });
 });
 
+// Middleware to ensure that session contains a logged in user
 const requireAuth = (req, res, next) => {
   const { user } = req.session;
   if (!user) {
@@ -65,7 +62,7 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
-///Update booking - actually this can be same as our create booking above right? -cyn
+// Update booking - actually this can be same as our create booking above right? -cyn
 router.put('/:hotelid/:roomid/', requireAuth, async (req, res) => {
   try {
     let { user } = req.session;
@@ -89,7 +86,7 @@ router.put('/:hotelid/:roomid/', requireAuth, async (req, res) => {
         },
       }
     );
-    await Users.findOneAndUpdate({
+    await Users.findByIdAndUpdate(user._id, {
       $push: {
         bookings: Object.assign(req.body, {
           hotel: bookedHotelName,
@@ -100,34 +97,6 @@ router.put('/:hotelid/:roomid/', requireAuth, async (req, res) => {
     });
     res.status(200).json(req.body);
   } catch (e) {}
-});
-
-// Hotels.findById(id, (err, hotel) => {
-//   let room = hotel.rooms.find(
-//     (room) => room._id.toString() == req.params.roomId
-//   );
-//   room.bookings.push(object_to_be_push);
-//   room.bookedDates.push(object_to_be_push);
-//   room.save();
-// });
-
-router.delete('/:hotelid/:bookingid', (req, res) => {
-  Hotels.findByIdAndUpdate(
-    req.params.hotelid,
-    {
-      $pull: {
-        'rooms.$.bookings': { _id: req.params.bookingid },
-      },
-    },
-    { new: true },
-    function (err, deletedBooking) {
-      if (err) {
-        return res.json(err);
-      } else {
-        return res.json(deletedBooking);
-      }
-    }
-  );
 });
 
 module.exports = router;
