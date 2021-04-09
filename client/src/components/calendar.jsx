@@ -144,62 +144,66 @@ const Calendar = (props) => {
       <br></br>
 
     <form onSubmit={handleSubmit}>
+      
+      <h6>Check In Date:</h6>
       <input
       type='text'
       value= {newStartDate}
       id='checkIn'
       placeholder='title'
-      readOnly={newStartDate}
+      readOnly
       onChange={handleChange}
       />
 
       <br></br>
       <br></br>
 
+      <h6>Check Out Date:</h6>
       <input
       type='text'
       value= {newEndDate}
       id='checkOut'
       placeholder='title'
-      readOnly={newEndDate}
+      readOnly
       onChange={handleChange}
       />
 
       <br></br>
       <br></br>
 
-
+      <h6>Total Nights:</h6>
        <input
       type='text'
       value= {numOfNight}
       id='totalNight'
       placeholder='title'
-      readOnly={numOfNight}
+      readOnly
       onChange={handleChange}
       />
 
       <br></br>
       <br></br>
 
+      <h6>Total Price(SGD):</h6>
        <input
       type='text'
       value= {totalPrice}
       id='totalPrice'
       placeholder='title'
-      readOnly= {totalPrice}
+      readOnly
       onChange={handleChange}
       />
       <br></br>
       <br></br>
 
-      <input
+      {/* <input
       type='text'
       value= 'user?'
       id='user'
       placeholder='title'
       readOnly='user'
       onChange={handleChange}
-      />
+      /> */}
       <br></br>
       <br></br>
 

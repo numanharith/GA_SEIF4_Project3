@@ -4,7 +4,6 @@ import Calendar from '../components/Calendar';
 
 const BookingPage = ( { match, location } ) => {
   const { roomNumber, size, img, price } = location.state;
-  
   useEffect(() => {
     fetchHotels();
   }, []);
@@ -32,6 +31,7 @@ const BookingPage = ( { match, location } ) => {
       </div>
     </div>
   );
+  return <>(BookingPage())</>;
 };
 
 export default BookingPage;

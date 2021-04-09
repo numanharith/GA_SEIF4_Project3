@@ -4,6 +4,17 @@ const bcrypt = require("bcryptjs");
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, minLength: 4 },
   password: { type: String, required: true, minLength: 4 },
+  bookings: [
+    {
+      hotel: String,
+      roomNumber: Number,
+      roomSize: String,
+      checkIn: String,
+      checkOut: String,
+      totalPrice: Number,
+      totalNight: Number,
+    },
+  ],
 });
 
 ///below statics is for login purpose

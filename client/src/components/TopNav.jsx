@@ -9,6 +9,7 @@ const TopNav = () => {
   const handleSignOut = async () => {
     const res = await signout();
     authApi.setAuth(res.data.auth);
+    console.log('log out!')
     
   };
 

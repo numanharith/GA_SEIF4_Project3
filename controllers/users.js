@@ -41,8 +41,8 @@ router.post("/signin", async (req, res) => {
       auth: false,
     });
   }
-  // console.log(user);
 });
+
 router.post("/signup", (req, res) => {
   const user = new User(req.body);
   req.session.user = user; /// for storing session

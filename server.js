@@ -9,7 +9,6 @@ require('dotenv').config();
 // Enviroment variables
 const mongoURI = process.env.MONGODB_URI;
 const port = process.env.PORT;
-const secret = process.env.SECRET;
 
 // Controllers
 const hotelsController = require('./controllers/hotels');
@@ -50,7 +49,6 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  console.log(req.session);
   next();
 });
 
