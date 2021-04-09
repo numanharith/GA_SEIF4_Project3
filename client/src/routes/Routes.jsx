@@ -8,8 +8,6 @@ import HotelsPage from '../pages/HotelsPage';
 import RoomsPage from '../pages/RoomsPage';
 import BookingPage from '../pages/BookingPage';
 import { UserProfilePage } from '../pages/UserProfilePage';
-import { createBrowserHistory } from 'history';
-
 
 function Routes() {
   return (

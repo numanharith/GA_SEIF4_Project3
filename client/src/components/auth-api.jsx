@@ -18,8 +18,6 @@ const hasSignned = async () => {
 const signout = async () => {
   try {
     const res = await axios.get('/users/signout');
-    console.log(res);
-    console.log('authi-api logout');
     return res;
   } catch (error) {
     console.log(error);

@@ -3,11 +3,43 @@ const router = express.Router();
 const User = require('../models/users');
 const bcrypt = require('bcryptjs');
 
+router.post('/signup', (req, res) => {
+  const user = new User(req.body);
+  req.session.user = user; /// for storing session
+  user
+    .save()
+    .then((result) => {
+      res.json({
+        message: 'successfully created user',
+        auth: true,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        message: 'unable to create account' + err,
+        auth: false,
+      });
+    });
+});
+
 // GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
 //Temporary disable
 router.get('/', (req, res) => {
   User.find({}, (err, foundUsers) => {
     res.json(foundUsers);
+  });
+});
+
+// Retreive user's session data
+router.get('/profile', async (req, res) => {
+  let userid = req.session.user._id;
+  res.json(userid);
+});
+
+// Get user details for the User's profile page
+router.get('/profile/:userid', (req, res) => {
+  User.findById(req.params.userid, (err, foundUser) => {
+    res.json(foundUser);
   });
 });
 
@@ -30,20 +62,6 @@ router.delete('/profile/:userid/:bookingId', (req, res) => {
   );
 });
 
-
-// Retreive user's session data
-router.get('/profile', async (req, res) => {
-  let userid = req.session.user._id;
-  res.json(userid);
-});
-
-// Get user details for the User's profile page
-router.get('/profile/:userid', (req, res) => {
-  User.findById(req.params.userid, (err, foundUser) => {
-    res.json(foundUser);
-  });
-});
-
 router.post('/signin', async (req, res) => {
   // console.log(req.body);
   const { username, password } = req.body;
@@ -63,24 +81,6 @@ router.post('/signin', async (req, res) => {
   }
 });
 
-router.post('/signup', (req, res) => {
-  const user = new User(req.body);
-  req.session.user = user; /// for storing session
-  user
-    .save()
-    .then((result) => {
-      res.json({
-        message: 'successfully created user',
-        auth: true,
-      });
-    })
-    .catch((err) => {
-      res.json({
-        message: 'unable to create account',
-        auth: false,
-      });
-    });
-});
 
 ///for checking login in backend
 ///use postman signin once true go to below url to use get request will see auth: true
