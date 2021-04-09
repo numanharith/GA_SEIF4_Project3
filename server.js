@@ -1,10 +1,10 @@
 // Dependencies
-const express = require("express");
-const mongoose = require("mongoose");
+const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const db = mongoose.connection;
-const session = require("express-session");
-require("dotenv").config();
+const session = require('express-session');
+require('dotenv').config();
 
 // Enviroment variables
 const mongoURI = process.env.MONGODB_URI;
@@ -12,11 +12,11 @@ const port = process.env.PORT;
 const secret = process.env.SECRET;
 
 // Controllers
-const hotelsController = require("./controllers/hotels");
-const usersController = require("./controllers/users");
+const hotelsController = require('./controllers/hotels');
+const usersController = require('./controllers/users');
 
 // ... other imports
-const path = require("path");
+const path = require('path');
 
 // Connect to Mongo
 mongoose.connect(
@@ -28,34 +28,42 @@ mongoose.connect(
 );
 
 // Error / Disconnection
-db.on("error", (err) => console.log(`${err.message} is Mongod not running?`));
-db.on("disconnected", () => console.log("mongo disconnected"));
+db.on('error', (err) => console.log(`${err.message} is Mongod not running?`));
+db.on('disconnected', () => console.log('mongo disconnected'));
 
 // Middleware
-app.use(express.static(path.join(__dirname, "client", "build")));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 /// to create session
 app.use(
   session({
-    secret: "SECRET",
-    resave: false,
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
-    cookie: { secure: false },
+    resave: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: parseInt(process.env.SESSION_MAX_AGE),
+    },
   })
 );
 
+app.use((req, res, next) => {
+  console.log(req.session);
+  next();
+});
+
 // Routes
-app.use("/users", usersController);
-app.use("/hotels", hotelsController);
+app.use('/users', usersController);
+app.use('/hotels', hotelsController);
 
 // app.get('/', (req, res) => {
 //     res.status(404).json('Sorry, page does not exist!');
 // });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 app.listen(port, () => {

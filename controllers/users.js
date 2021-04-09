@@ -29,11 +29,11 @@ router.post("/signin", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findUser(username, password);
   if (user) {
-    req.session.user = user._id; /// for storing session
-    console.log("User ID is: ");
+    req.session.user = user; // for storing session
     res.json({
       message: "you are successfully login",
       auth: true,
+      user
     });
   } else {
     res.json({
@@ -45,7 +45,7 @@ router.post("/signin", async (req, res) => {
 });
 router.post("/signup", (req, res) => {
   const user = new User(req.body);
-  req.session.user = user._id; /// for storing session
+  req.session.user = user; /// for storing session
   user
     .save()
     .then((result) => {

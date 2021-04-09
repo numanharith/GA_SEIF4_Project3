@@ -11,15 +11,6 @@ router.get("/:id", (req, res) => {
   });
 });
 
-// GET ROOM FROM ID ON URL
-// router.get('/:hotelid/:roomid', (req, res) => {
-// 	Hotels.findById(req.params.hotelid, (err, foundHotel) => {
-// 		foundHotel.find({}, (err, foundRoom) => {
-// 			res.json(foundRoom);
-// 		});
-// 	});
-// });
-
 // GET ALL HOTELS (WE ONLY NEED TO DISPLAY HOTELS ON THE MAIN WEBPAGE)
 router.get("/", (req, res) => {
   Hotels.find({}, (err, foundHotels) => {
@@ -53,14 +44,28 @@ router.get("/findDate", (req, res) => {
   });
 });
 
+const requireAuth = (req, res, next) => {
+  const { user } = req.session;
+  if (!user) {
+    return res
+      .status(401)
+      .json({ message: 'Unauthorized'});
+  }
+  next();
+};
+
 ///Update booking - actually this can be same as our create booking above right? -cyn
-router.put("/:hotelid/:roomid/", async (req, res) => {
+router.put(
+  "/:hotelid/:roomid/", 
+  requireAuth,
+  async (req, res) => {
   try {
+    const { user } = req.session;
     await Hotels.findOneAndUpdate(
       { "rooms._id": req.params.roomid },
       {
         $push: {
-          "rooms.$.bookings": req.body,
+          "rooms.$.bookings": Object.assign(req.body, { user: user._id }),
           "rooms.$.bookedDates": { $each: req.body.bookedDates },
         },
       }
