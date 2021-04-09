@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,15 +12,15 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import AuthApi from '../utils/AuthAPI'
+import AuthApi from '../utils/AuthAPI';
 import { signin } from './auth-api';
 import '../styles/signin.css';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color='inherit' href='https://material-ui.com/'>
         The Hotel App
       </Link>{' '}
       {new Date().getFullYear()}
@@ -55,10 +55,10 @@ export default function SignIn() {
   const classes = useStyles();
   // const authApi = React.useContext(AuthApi);
   const authApi = useContext(AuthApi);
-  
+
   ///function
-  const handleSignIn = async(e) => {
-    const res = await signin ({username ,password});
+  const handleSignIn = async (e) => {
+    const res = await signin({ username, password });
     // console.log(res)
     if (res.data.auth) {
       authApi.setAuth(true);
@@ -68,15 +68,16 @@ export default function SignIn() {
 
   const handleOnChange = (e) => {
     e.preventDefault();
-    if (e.target.name === 'username'){ /// referring to name that we have targeted.
+    if (e.target.name === 'username') {
+      /// referring to name that we have targeted.
       setUsername(e.target.value);
     } else {
-      setPassword(e.target.value); 
+      setPassword(e.target.value);
     }
-  }
+  };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <div></div>
       <CssBaseline />
       <div className={classes.paper}>
@@ -85,43 +86,42 @@ export default function SignIn() {
         </Avatar>
         {/* <Typography component="h1" variant="h5" > */}
         {/* <Typography style={{font-family:'Lobster',cursive}}> */}
-        <Typography >
+        <Typography>
           <span id='fonts'>The Hotel App</span>
         </Typography>
         <form className={classes.form}>
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            id="username"
-            label="username"
-            name="username"
-            autoComplete="username"
+            id='username'
+            label='username'
+            name='username'
+            autoComplete='username'
             autoFocus
-            onChange = {handleOnChange}
-            
+            onChange={handleOnChange}
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            name="password"
-            label="password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange = {handleOnChange}
+            name='password'
+            label='password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
+            onChange={handleOnChange}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            control={<Checkbox value='remember' color='primary' />}
+            label='Remember me'
           />
           <Button
             fullWidth
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             className={classes.submit}
             onClick={handleSignIn}
           >
@@ -129,12 +129,12 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href='#' variant='body2'>
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <Link href='/signup' variant='body2'>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

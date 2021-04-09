@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router'
-import TopNav from '../components/TopNav';
+import { useHistory } from 'react-router';
 import { Booking } from '../components/UserProfilePage/Booking';
-import '../styles/UserProfilePage.css';
+import TopNav from '../components/TopNav';
 import axios from 'axios';
+import '../styles/UserProfilePage.css';
 
 export const UserProfilePage = ({ match }) => {
   useEffect(() => {
     fetchUserData();
-  }, []);
+  });
 
   const [bookings, getBookings] = useState([]);
   const [name, getName] = useState('');
@@ -16,14 +16,14 @@ export const UserProfilePage = ({ match }) => {
   const fetchUserData = async () => {
     const response = await fetch(`/users/profile/${match.params.userid}`);
     const jsonedResponse = await response.json();
-    await getBookings(jsonedResponse.bookings);
-    await getName(jsonedResponse.username);
+    getBookings(jsonedResponse.bookings);
+    getName(jsonedResponse.username);
   };
 
   const deleteBooking = async (bookingId) => {
     try {
       await axios.delete(`/users/profile/${match.params.userid}/${bookingId}`);
-      history.go(1);
+      history.go(0);
     } catch (err) {
       console.log(err);
     }
@@ -32,7 +32,9 @@ export const UserProfilePage = ({ match }) => {
   return (
     <React.Fragment>
       <TopNav />
+      <br></br>
       <h1>Welcome, {name}!</h1>
+      <br></br>
       <table class='table'>
         <thead>
           <tr>

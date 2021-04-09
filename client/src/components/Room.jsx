@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Room = ( { room, hotel } ) => {
-  console.log('hotel prop is ' + hotel)
+const Room = ({ room, hotel }) => {
+  console.log('hotel prop is ' + hotel);
   // const { room } = props;
 
   return (
-    
     <div className='col-md-4'>
       <h2>{room.name}</h2>
       <div className='card mb-4 shadow-sm'>
@@ -19,7 +18,9 @@ const Room = ( { room, hotel } ) => {
         />
         <div className='card-body'>
           <h1 className='card-text d-flex justify-content-center'>
-            <Link to={{pathname:`${hotel}/${room._id}/`, state: room }}>{room.size}</Link>
+            <Link to={{ pathname: `${hotel}/${room._id}/`, state: room }}>
+              {room.size}
+            </Link>
           </h1>
           <br />
           Price: ${room.price}/night
